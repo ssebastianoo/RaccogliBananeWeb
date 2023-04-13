@@ -31,7 +31,8 @@
       image: bananaImage,
     };
     bananas.push(banana);
-    waitTime += 100;
+
+    if (waitTime - 10 > 0) waitTime -= 10;
 
     if (!end) setTimeout(bananasCreator, waitTime);
   }
@@ -63,7 +64,7 @@
       end = false;
       waitTime = 1000;
       bananasCreator();
-      bananasPusher();
+      requestAnimationFrame(bananasPusher);
     }
   }
 
