@@ -5,9 +5,17 @@
 
   onMount(() => {
     document.addEventListener("mousemove", (e) => {
-      $basket.style.left = `calc(${e.pageX}px - ${
-        $basket.width / 2
-      }px)`;
+      const x = e.pageX - $basket.width / 2;
+
+      if (x < 0) {
+        $basket.style.left = 0 + "px";
+        return;
+      } else if (x > window.innerWidth - $basket.width) {
+        $basket.style.left = window.innerWidth - $basket.width + "px";
+        return;
+      }
+
+      $basket.style.left = x + "px";
     });
   });
 </script>

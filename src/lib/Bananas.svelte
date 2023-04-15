@@ -7,8 +7,6 @@
     id: number;
     x: number;
     y: number;
-    width: number;
-    height: number;
     image: string;
   };
 
@@ -24,10 +22,8 @@
   function bananasCreator() {
     let banana: Banana = {
       id: Date.now(),
-      x: Math.random() * 100 - (bananaSize.width * 100) / window.innerWidth,
+      x: Math.random() * (100 - (bananaSize.width * 100) / window.innerWidth),
       y: 0,
-      width: 100,
-      height: 100,
       image: bananaImage,
     };
     bananas.push(banana);
@@ -41,7 +37,8 @@
     bananas.map((banana) => {
       if (banana.y + 40 > $basket.offsetTop) {
         if (
-          banana.x > ($basket.offsetLeft * 100) / window.innerWidth &&
+          banana.x + (bananaSize.width * 100) / window.innerWidth >
+            ($basket.offsetLeft * 100) / window.innerWidth &&
           banana.x <
             (($basket.offsetLeft + $basket.clientWidth) * 100) /
               window.innerWidth
@@ -52,7 +49,7 @@
           end = true;
         }
       }
-      banana.y += 1;
+      banana.y += (0.05 * window.innerHeight) / 100;
     });
     bananas = bananas.filter((banana) => banana.y < window.innerHeight);
 
@@ -63,7 +60,6 @@
       $points = 0;
       end = false;
       waitTime = 1000;
-      bananasCreator();
       requestAnimationFrame(bananasPusher);
     }
   }
