@@ -2,10 +2,95 @@
   import Basket from "$lib/Basket.svelte";
   import Bananas from "$lib/Bananas.svelte";
   import Points from "$lib/Points.svelte";
+  import Auth from "$lib/Auth.svelte";
+  import { user } from "$lib/store";
+
+  let start = false;
 </script>
 
-<div class="game">
-  <Points />
-  <Bananas />
+{#if !start}
+  <div class="intro">
+    <header>
+      <p>You have 6969 points</p>
+      <Auth />
+    </header>
+    <div class="container">
+      <div class="content">
+        <h1>Raccogli Banane</h1>
+        <div class="buttons">
+          <button
+            class="btn"
+            on:click={() => {
+              start = true;
+            }}>Play</button
+          >
+          <a href="/leaderboard" class="btn">Leaderboard</a>
+        </div>
+      </div>
+    </div>
+    <footer><p>The Raccogli Banane Foundation • 2023</p></footer>
+  </div>
+{:else}
   <Basket />
-</div>
+  <Bananas />
+  <Points />
+{/if}
+
+<style lang="scss">
+  @import "../variables";
+
+  .intro {
+    background-image: url("/banana-background.png");
+    background-size: 200px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $headerHeight;
+
+    p {
+      font-size: 1.2em;
+    }
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 30px - $headerHeight * 2);
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      h1 {
+        font-size: 3em;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+
+        button,
+        a {
+          width: 50%;
+          font-size: 1.6em;
+        }
+      }
+    }
+  }
+
+  footer {
+    height: $headerHeight;
+    display: grid;
+    place-items: center;
+
+    p {
+      font-size: 0.9em;
+      opacity: 0.7;
+    }
+  }
+</style>

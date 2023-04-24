@@ -1,5 +1,33 @@
+@import "./variables";
+
+@font-face {
+  font-family: "Abril Fatface";
+  src: url("/AbrilFatface-Regular.ttf");
+}
+
 body {
   margin: 0;
-  background: rgb(59, 119, 62);
+  background: $black;
   color: white;
+  font-family: "Abril Fatface", cursive;
+}
+
+* {
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.btn {
+  all: unset;
+  background-color: $yellow;
+  color: $black;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  text-align: center;
+
+  &:hover {
+    background-color: $darkYellow;
+    cursor: pointer;
+  }
 }
