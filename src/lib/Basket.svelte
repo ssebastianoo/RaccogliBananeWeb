@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import basketImage from "$lib/assets/basket.jpg";
+  import basketImage from "$lib/assets/Basket.png";
   import { basket } from "./store";
 
   onMount(() => {
@@ -32,7 +32,7 @@
 
 <style lang="scss">
   .cursor {
-    min-height: calc(100vh - 40px);
+    min-height: calc(100vh - 10px);
     display: flex;
     align-items: flex-end;
 

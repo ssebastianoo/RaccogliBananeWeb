@@ -1,7 +1,9 @@
 <script lang="ts">
-  import bananaImage from "$lib/assets/banana.webp";
+  import bananaImage from "$lib/assets/Banana.png";
   import { onMount } from "svelte";
-  import { basket, points } from "./store";
+  import { basket, points, user } from "./store";
+  import { doc, updateDoc, increment } from "firebase/firestore";
+  import { db } from "$lib/firebase";
 
   type Banana = {
     id: number;
@@ -18,6 +20,16 @@
   let bananas: Banana[] = [];
   let waitTime: number = 1000;
   let end: boolean = false;
+
+  async function setPoints() {
+    if ($user.logged) {
+      const ref = doc(db, "users", $user.uid);
+      await updateDoc(ref, {
+        points: increment($points),
+      });
+      $user.points += $points;
+    }
+  }
 
   function bananasCreator() {
     let banana: Banana = {
@@ -55,6 +67,7 @@
 
     if (!end) requestAnimationFrame(bananasPusher);
     else {
+      setPoints();
       bananas = [];
       alert("Game Over, you made " + $points + " points!");
       $points = 0;

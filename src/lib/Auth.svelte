@@ -93,15 +93,16 @@
         let newName = await namePrompt();
         await createUser(result.user.uid, newName);
         $user.username = newName;
+        $user.points = 0;
       } else {
         return null;
       }
     } else {
       $user.username = userData.username;
+      $user.points = userData.points;
     }
     $user.logged = true;
     $user.uid = result.user.uid;
-    $user.points = 0;
   }
 
   onMount(() => {

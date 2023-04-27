@@ -1,0 +1,71 @@
+<script lang="ts">
+  import Auth from "$lib/Auth.svelte";
+
+  export let data;
+</script>
+
+<header>
+  <Auth />
+</header>
+<div class="leaderboard">
+  <h2>Leaderboard</h2>
+  <div class="users">
+    {#each data.users as user, index}
+      <div class="user">
+        <p>{index + 1}. <a href={"/@" + user.username}>@{user.username}</a></p>
+        <p>{user.points}</p>
+      </div>
+    {/each}
+  </div>
+</div>
+
+<style lang="scss">
+  @import "../../variables";
+
+  $maxWidth: 500px;
+
+  header {
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .leaderboard {
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
+    h2 {
+      width: 100%;
+      max-width: $maxWidth;
+    }
+
+    .users {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: $maxWidth;
+      background-color: rgba(0, 0, 0, 0.352);
+      border-radius: 12px;
+
+      .user {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+
+        a {
+          margin-left: 8px;
+          font-size: 1.1em;
+          color: unset;
+          text-decoration: underline;
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $yellow;
+        }
+      }
+    }
+  }
+</style>

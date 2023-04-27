@@ -11,7 +11,11 @@
 {#if !start}
   <div class="intro">
     <header>
-      <p>You have 6969 points</p>
+      {#if $user.logged}
+        <p>You have {$user.points} {$user.points === 1 ? "point" : "points"}</p>
+      {:else}
+        <div />
+      {/if}
       <Auth />
     </header>
     <div class="container">
@@ -31,13 +35,31 @@
     <footer><p>The Raccogli Banane Foundation • 2023</p></footer>
   </div>
 {:else}
-  <Basket />
-  <Bananas />
-  <Points />
+  <header>
+    <Points />
+    {#if $user.logged}
+      <Auth />
+    {:else}
+      <div />
+    {/if}
+  </header>
+  <div class="game">
+    <Basket />
+    <Bananas />
+  </div>
 {/if}
 
 <style lang="scss">
   @import "../variables";
+
+  .game {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: -1;
+  }
 
   .intro {
     background-image: url("/banana-background.png");

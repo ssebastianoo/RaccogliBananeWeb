@@ -3,12 +3,8 @@
 </script>
 
 <div class="points">
-  <input type="text" value={$points + " points"} readonly />
+  <p> {$points} {$points === 1 ? "point" : "points"}</p>
 </div>
 
 <style>
-  .points {
-    position: absolute;
-    right: 0;
-  }
 </style>
