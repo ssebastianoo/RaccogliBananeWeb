@@ -31,3 +31,9 @@ body {
     cursor: pointer;
   }
 }
+
+.parent {
+  background-image: url("/banana-background.png");
+  background-size: 200px;
+  height: 100%;
+}

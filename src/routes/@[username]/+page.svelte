@@ -105,12 +105,6 @@
     }
   }
 
-  .parent {
-    background-image: url("/banana-background.png");
-    background-size: 200px;
-    height: 100%;
-  }
-
   .user-profile {
     display: flex;
     justify-content: center;

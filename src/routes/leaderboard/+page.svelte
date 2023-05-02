@@ -4,19 +4,23 @@
   export let data;
 </script>
 
-<header>
-  <div />
-  <Auth />
-</header>
-<div class="leaderboard">
-  <h2>Leaderboard</h2>
-  <div class="users">
-    {#each data.users as user, index}
-      <div class="user">
-        <p>{index + 1}. <a href={"/@" + user.username}>@{user.username}</a></p>
-        <p>{user.points}</p>
-      </div>
-    {/each}
+<div class="parent">
+  <header>
+    <div />
+    <Auth />
+  </header>
+  <div class="leaderboard">
+    <h2>Leaderboard</h2>
+    <div class="users">
+      {#each data.users as user, index}
+        <div class="user">
+          <p>
+            {index + 1}. <a href={"/@" + user.username}>@{user.username}</a>
+          </p>
+          <p>{user.points}</p>
+        </div>
+      {/each}
+    </div>
   </div>
 </div>
 
