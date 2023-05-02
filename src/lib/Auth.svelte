@@ -20,6 +20,7 @@
   import { onMount } from "svelte";
 
   let loaded = false;
+  let avatarElement: HTMLImageElement;
 
   const provider = new GoogleAuthProvider();
 
@@ -56,12 +57,21 @@
     });
   }
 
-  async function namePrompt(): Promise<string> {
+  async function namePrompt(): Promise<{
+    abort: boolean;
+    username: string;
+  }> {
     let end = false;
     let finalName: string = "";
     while (!end) {
       let newName = prompt("Please enter your username");
       if (!newName) {
+        if (!newName?.length) {
+          return {
+            abort: true,
+            username: "",
+          };
+        }
         alert("Please enter a valid username");
         end = false;
       } else {
@@ -79,7 +89,10 @@
         }
       }
     }
-    return finalName;
+    return {
+      abort: false,
+      username: finalName,
+    };
   }
 
   async function userChecks(
@@ -91,9 +104,14 @@
     if (!userData) {
       if (createUserIfNull) {
         let newName = await namePrompt();
-        await createUser(result.user.uid, newName);
-        $user.username = newName;
-        $user.points = 0;
+
+        if (!newName.abort) {
+          await createUser(result.user.uid, newName.username);
+          $user.username = newName.username;
+          $user.points = 0;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
@@ -153,10 +171,13 @@
   {#if loaded}
     {#if $user.logged}
       <div class="avatar">
-        <img
-          src={"https://source.boringavatars.com/beam/50/" + $user.username}
-          alt="Beam"
-        />
+        <a href={"/@" + $user.username}>
+          <img
+            bind:this={avatarElement}
+            src={"https://source.boringavatars.com/beam/50/" + $user.username}
+            alt="Beam"
+          />
+        </a>
 
         <div class="menu">
           <p>@{$user.username}</p>
@@ -186,6 +207,10 @@
 
   .avatar {
     display: inline-flex;
+
+    a {
+      display: flex;
+    }
 
     img {
       height: $headerHeight;

@@ -5,6 +5,7 @@
 </script>
 
 <header>
+  <div />
   <Auth />
 </header>
 <div class="leaderboard">
@@ -25,9 +26,10 @@
   $maxWidth: 500px;
 
   header {
-    height: 50px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    height: $headerHeight;
   }
 
   .leaderboard {

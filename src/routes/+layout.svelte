@@ -6,8 +6,11 @@
   <slot />
 </main>
 
-<style>
+<style lang="scss">
+  @import "../variables";
+
   main {
-    padding: 15px;
+    padding: $padding;
+    height: calc(100vh - $padding * 2);
   }
 </style>
