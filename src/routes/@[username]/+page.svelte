@@ -57,28 +57,34 @@
   }
 </script>
 
-<header>
-  <a href="/">Home</a>
-  <Auth />
-</header>
-<div class="user-profile">
-  {#if !data.user}
-    <h1>User not found</h1>
-  {:else}
-    <div class="content">
-      <img
-        src={"https://source.boringavatars.com/beam/50/" + data.user.username}
-        alt="Avatar"
-      />
-      <h1>@{data.user.username}</h1>
-      <h2>{data.user.points} {data.user.points === 1 ? "banana" : "banans"}</h2>
-      {#if $user.uid === data.user.uid}
-        <button class="edit" on:click={editUsername}>Edit Username</button>
-        <button class="reset" on:click={resetPoints}>Reset Points</button>
-        <button class="delete" on:click={deleteAccount}>Delete Account</button>
-      {/if}
-    </div>
-  {/if}
+<div class="parent">
+  <header>
+    <a href="/">Home</a>
+    <Auth />
+  </header>
+  <div class="user-profile">
+    {#if !data.user}
+      <h1>User not found</h1>
+    {:else}
+      <div class="content">
+        <img
+          src={"https://source.boringavatars.com/beam/50/" + data.user.username}
+          alt="Avatar"
+        />
+        <h1>@{data.user.username}</h1>
+        <h2>
+          {data.user.points}
+          {data.user.points === 1 ? "banana" : "banans"}
+        </h2>
+        {#if $user.uid === data.user.uid}
+          <button class="edit" on:click={editUsername}>Edit Username</button>
+          <button class="reset" on:click={resetPoints}>Reset Points</button>
+          <button class="delete" on:click={deleteAccount}>Delete Account</button
+          >
+        {/if}
+      </div>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
@@ -99,12 +105,16 @@
     }
   }
 
+  .parent {
+    background-image: url("/banana-background.png");
+    background-size: 200px;
+    height: 100%;
+  }
+
   .user-profile {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("/banana-background.png");
-    background-size: 200px;
     height: calc(100% - $headerHeight);
   }
 
