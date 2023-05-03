@@ -63,10 +63,6 @@
   description={data.user
     ? `Check ${data.user.username} stats on Raccogli Banane 🍌`
     : "¯\\_(ツ)_/¯"}
-  image={data.user
-    ? `https://source.boringavatars.com/beam/20/${data.user.username}`
-    : "/banner.png"}
-  cardType={data.user ? "summary" : "summary_large_image"}
 />
 
 <div class="parent">
