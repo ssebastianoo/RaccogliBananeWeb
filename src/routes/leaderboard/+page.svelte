@@ -1,9 +1,14 @@
 <script lang="ts">
   import Auth from "$lib/Auth.svelte";
+  import MetaTags from "$lib/MetaTags.svelte";
 
   export let data;
 </script>
 
+<MetaTags
+  title="Banans Leadeboard"
+  description="Who gained more bananas? 🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌"
+/>
 <div class="parent">
   <header>
     <div />

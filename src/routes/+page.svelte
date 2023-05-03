@@ -4,9 +4,12 @@
   import Points from "$lib/Points.svelte";
   import Auth from "$lib/Auth.svelte";
   import { user } from "$lib/store";
+  import MetaTags from "$lib/MetaTags.svelte";
 
   let start = false;
 </script>
+
+<MetaTags />
 
 {#if !start}
   <div class="intro">
