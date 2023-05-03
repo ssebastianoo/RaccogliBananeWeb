@@ -10,6 +10,7 @@
     x: number;
     y: number;
     image: string;
+    speed: number;
   };
 
   let bananaSize = {
@@ -19,6 +20,7 @@
 
   let bananas: Banana[] = [];
   let waitTime: number = 1000;
+  let speed: number = 0.3;
   let end: boolean = false;
 
   async function setPoints() {
@@ -37,10 +39,11 @@
       x: Math.random() * (100 - (bananaSize.width * 100) / window.innerWidth),
       y: 0,
       image: bananaImage,
+      speed,
     };
     bananas.push(banana);
 
-    if (waitTime - 10 > 0) waitTime -= 10;
+    if (waitTime - 3 > 0) waitTime -= 3;
 
     if (!end) setTimeout(bananasCreator, waitTime);
   }
@@ -61,11 +64,12 @@
           end = true;
         }
       }
-      banana.y += (0.05 * window.innerHeight) / 100;
+      banana.y += (banana.speed * window.innerHeight) / 100;
+      speed += 0.0001;
     });
     bananas = bananas.filter((banana) => banana.y < window.innerHeight);
 
-    if (!end) requestAnimationFrame(bananasPusher);
+    if (!end) setTimeout(bananasPusher, 20);
     else {
       setPoints();
       bananas = [];
@@ -73,7 +77,8 @@
       $points = 0;
       end = false;
       waitTime = 1000;
-      requestAnimationFrame(bananasPusher);
+      speed = 0.3;
+      setTimeout(bananasPusher, 20);
     }
   }
 
