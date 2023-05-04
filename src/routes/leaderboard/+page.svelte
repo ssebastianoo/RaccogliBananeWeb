@@ -6,7 +6,7 @@
 </script>
 
 <MetaTags
-  title="Banans Leadeboard"
+  title="Bananas Leadeboard"
   description="Who gained more bananas? 🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌"
 />
 <div class="parent">

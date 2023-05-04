@@ -82,7 +82,7 @@
         <h1>@{data.user.username}</h1>
         <h2>
           {data.user.points}
-          {data.user.points === 1 ? "banana" : "banans"}
+          {data.user.points === 1 ? "banana" : "bananas"}
         </h2>
         {#if $user.uid === data.user.uid}
           <button class="edit" on:click={editUsername}>Edit Username</button>
